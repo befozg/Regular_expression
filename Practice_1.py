@@ -1,11 +1,17 @@
+import numpy as np
+import re
+import collections
+
 def reg_exp_input():
     reg_exp = input().replace(' ', '')
     full_stdin = [list(reg_exp), input(), input()]
+    words = re.findall(r'\w+', full_stdin[1])
     return full_stdin
 
 
 def kleene_star(last_set, pattern, k, prefixes_set):
     result_set = set()
+    arr = np.array([])
     prefix = pattern * k
     for word in last_set:
         if word == '':
@@ -98,14 +104,16 @@ def does_the_prefix_exist(reg_exp, pattern, in_power):
 def get_prefixes_set(x, k):
     prefixes_set = set()
     letter = ''
+    default_dict = collections.defaultdict(lambda: collections.defaultdict(int))
     for s in range(k):
         letter += x
         prefixes_set.add(letter)
     return prefixes_set
 
-
+'''
 try:
     std_input = reg_exp_input()
     print(does_the_prefix_exist(std_input[0], std_input[1], int(std_input[2])))
 except Exception:
     print("ERROR")
+'''
